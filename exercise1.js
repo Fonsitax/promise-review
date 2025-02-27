@@ -9,6 +9,8 @@ const url1 = 'https://jsonplaceholder.typicode.com/posts/1';
 const url2 = 'https://jsonplaceholder.typicode.com/invalid-url';
 const url3 = 'https://jsonplaceholder.typicode.com/posts/3';
 
+const errorMsg = "One API fails = the entire operation fails 😔";
+
 // Function to fetch data from an API and parse the response to JSON..
 const fetchData = (url) => {
 return fetch(url)
@@ -21,7 +23,7 @@ return fetch(url)
     })
 
     .catch(error => {
-        return Promise.reject(`Error fetching data from ${url}: one API fails so the entire operation fails 😔`)
+        return Promise.reject(`Error fetching data from ${url}. ${errorMsg}`)
     })
    
 };
@@ -30,10 +32,10 @@ return fetch(url)
 // Using Promise.all to fetch data from all 3 APIS at once
 Promise.all([fetchData(url1), fetchData(url2), fetchData(url3)])
     .then(result => {
-        console.log("All data fetched successfully!");
-        console.log(result);
+        console.log("All data fetched successfully! 😊", result);
+        
     })
 
     .catch(error => {
-        console.log("Error!", error);
+        console.log("One error detected!", error);
     });
